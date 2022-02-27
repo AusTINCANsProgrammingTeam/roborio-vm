@@ -55,7 +55,7 @@ mkdir unpacked
 unzip "$ROBORIO_ZIP" -d unpacked
 # there are two files in there, one is a zip file, unzip the zip file
 mkdir unpacked/more
-unzip unpacked/*.zip -d unpacked/more
+unzip unpacked/FRC*/*.zip -d unpacked/more
 
 # Make sure the file we're looking for is there
 if [ ! -f unpacked/more/systemimage.tar.gz ]; then
@@ -85,9 +85,9 @@ sudo tar -xf unpacked/more/systemimage.tar.gz --directory mnt
 
 # Modify the startup configuration to enable SSHD
 STARTUP_INI_FILE=mnt/etc/natinst/share/ni-rt.ini
-sudo python _modify_ini.py ${STARTUP_INI_FILE} SYSTEMSETTINGS host_name roboRIO-VM
-sudo python _modify_ini.py ${STARTUP_INI_FILE} SYSTEMSETTINGS sshd.enabled True
-sudo python _modify_ini.py ${STARTUP_INI_FILE} SYSTEMSETTINGS ConsoleOut.enabled True
+sudo python _modify_ini.py ${STARTUP_INI_FILE} systemsettings host_name roboRIO-VM
+sudo python _modify_ini.py ${STARTUP_INI_FILE} systemsettings sshd.enabled True
+sudo python _modify_ini.py ${STARTUP_INI_FILE} systemsettings ConsoleOut.enabled True
 
 # Unmount it
 rm_mount
